@@ -30,7 +30,7 @@ PCB Bottom Photo
 | LCD | (unknow yet) | |
 
 ## Reverse Engineering
-### 1). MCU pinout guessing
+### 1). MCU pinout detetion
 
 ### 2). MCU part number detection over SWD
 
