@@ -45,7 +45,7 @@ PCB Bottom Photo
 
 | Component | Silkprint | Description |
 | --- | --- | --- |
-| MCU | SYN2A-000 | Silkprint Customized Artery AT32F421C8T7 without bootloader (120MHz,64KByte Flash,16KByte SRAM) |
+| MCU | SYN2A-000 | Silkprint Customized Artery AT32F421C8T7 without Artery ISP bootloader (120MHz,64KByte Flash,16KByte SRAM) |
 | RF | Beken BK4819 | |
 | Flash | XMC 25QH16CJIG | 16Mbit |
 | LCD | (unknown yet) | |
