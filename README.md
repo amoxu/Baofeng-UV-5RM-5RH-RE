@@ -79,15 +79,16 @@ This can be used for firmware encryption and decryption, and also provides condi
 
 > [!NOTE]
 > About the .BF wrapping file format.
-> First 16 bytes was for the header.
+>
+> Here is the draft table describes the .BF file format.
 > | Offset | Length | Description |
 > | --- | --- | --- |
 > | 0x00 | 1 | Wrapped Region Count |
 > | 0x01 | 4 | Region 1 Length, Encrypted firmware bin file length  |
-> | 0x05 | 4 | Region 2 Length, It’s not clear yet. The guess is that it is related to the configuration. It will be clear after the Bootloader and Firmware are completely reverse engineered. |
+> | 0x05 | 4 | Region 2 Length, config length? |
 > | 0x09 | 7 | No clear usage found, testing of random values seems no impact. |
 > | 0x10 | Region 1 Length | Encrypted Firmware Bin Hex |
-> | 0x10 + Region 1 Length | Region 2 Length | Configuration Hex? |
+> | 0x10 + Region 1 Length | Region 2 Length | Configuration Hex? It’s not clear yet. The guess was that it is related to the configuration. It will be clear after the Bootloader and Firmware are completely reverse engineered. |
 
 ### 5). Factory firmware decryption and reverse engineering
 
