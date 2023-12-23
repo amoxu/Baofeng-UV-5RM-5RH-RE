@@ -1,6 +1,27 @@
 # Baofeng-UV-5RM-5RH-RE
 Reverse Engineering of Baofeng UV-5RM(Global Tri-band)/UV-5RH(CN Tri-band) Radio
 
+> [!CAUTION]  
+> According to feedbacks, these firmware files only work on HARDWARE V01.
+> Before attempting to upgrade, please make sure that your device firmware version be at least v0.09 or above.
+>
+> Devices running firmware version below v0.09 may have different hardware design, if the latest firmwares flashed to these devices, 
+> you may encounter key function problems such as no RF transmition when pushing PTT.
+
+> [!WARNING]  
+> The firmware files in the factory_firmware directory come from different sources. 
+>
+> Different Hams obtaind them from their sellers and then shared them in the Ham group, I tried to collect them here. 
+>
+> There is no guarantee that they are from the original manufacturer.
+>
+> These firmware files are provided for research and study purposes only.
+>
+> DO NOT use these firmware files for commercial purposes.
+>
+> DO NOT use these firmware files for any illegal purposes.
+
+
 ## Introduction
 Front Photo
 ![front](./teardown/1-front.jpg)
