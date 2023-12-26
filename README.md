@@ -2,11 +2,24 @@
 Reverse Engineering of Baofeng UV-5RM(Global Tri-band)/UV-5RH(CN Tri-band) Radio
 
 > [!CAUTION]  
-> According to feedbacks, these firmware files only work on HARDWARE V01.
-> Before attempting to upgrade, please make sure that your device firmware version be at least v0.09 or above.
+> **Currently, This project only involves models using the BK4819 RF transceiver.**
 >
-> Devices running firmware version below v0.09 may have different hardware design, if the latest firmwares flashed to these devices, 
-> you may encounter key function problems such as no RF transmition when pushing PTT.
+> Before attempting to upgrade, please make sure that your device firmware version be at least v0.09 or above.
+> Devices running firmware version below v0.09 may have different hardware design, if you  upgrade to higher version firmwares, you may encounter key function problems such as no RF transmition when pushing PTT.
+>
+>
+> ---
+> According to feedbacks, these firmware files only work on 5RB10W HARDWARE V01, which using BK4819 RF tranceiver.
+>
+> **Currently known BK4819 Transceiver model identification methods includes:**
+> * The model name mentioned on the product description page is UV5RM, or UV5RH(M Edition)
+> * The product description page confirms that it supports three-band transmission.
+> * If you remove the battery, you can see a yellow round label with the word "BK" printed on it.
+> 
+> **If the following conditions are met, the version of the AT1846S transceiver may be used:**
+> * The model name is UV5RL or UV5RH (L Edition).
+> * The product introduction does not mention tri-band transmission support.
+> * The version of firmware is v0.07 or v0.06.
 
 > [!WARNING]  
 > The firmware files in the factory_firmware directory come from different sources. 
