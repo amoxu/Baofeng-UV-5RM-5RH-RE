@@ -5,7 +5,7 @@ Reverse Engineering of Baofeng UV-5RM(Global Tri-band)/UV-5RH(CN Tri-band) Radio
 > **Currently, This project only involves models using the BK4819 RF transceiver.**
 >
 > Before attempting to upgrade, please make sure that your device firmware version be at least v0.09 or above.
-> Devices running firmware version below v0.09 may have different hardware design, if you  upgrade to higher version firmwares, you may encounter key function problems such as no RF transmition when pushing PTT.
+> Devices running firmware version below v0.09 may have different hardware design, if you  upgrade to higher version firmwares, you may encounter key function problems such as RF does not work.
 >
 >
 > ---
