@@ -16,15 +16,15 @@ Reverse Engineering of Baofeng UV-5RM(Global Tri-band)/UV-5RH(CN Tri-band) Radio
 > * The product description page confirms that it supports three-band transmission.
 > * If you remove the battery, you can see a yellow round label with the word "BK" printed on it.
 > 
-> **If the following conditions are met, the version of the AT1846S transceiver may be used:**
+> **If any of the following conditions are met, they may be another hardware using AT1846S transceiver:**
 > * The model name is UV5RL or UV5RH (L Edition).
-> * The product introduction does not mention tri-band transmission support.
+> * The product introduction does not mention 220-250MHz(1.25 Meters VHF) transmission support.
 > * The version of firmware is v0.07 or v0.06.
 
 > [!WARNING]  
-> The firmware files in the factory_firmware directory come from different sources. 
+> The firmware files under the [factory_firmware](factory_firmware/) foler are collected from different sources. 
 >
-> Different Hams obtaind them from their sellers and then shared them in the Ham group, I tried to collect them here. 
+> Different Hams obtaind them from their sellers and then shared them in the Ham groups or channels. 
 >
 > There is no guarantee that they are from the original manufacturer.
 >
@@ -78,7 +78,7 @@ The Flash was divided to 2 areas:
 
 The Bootloader was used to receive the encrypted firmware upgrade packages sent from the computer, and decrypt them before writing it to the firmware area of the Flash, which is starting from the address 0x08001000.
 
-The firmware package was encrypted, but after research, I found that the first 2KBytes of the firmware may not be encrypted, so I tried to implement a firmware smaller than 2KByte. The only function was to read the the first 4KByte of Flash which storing Bootloader and send it out through the serial port on the K connector.
+The firmware package was encrypted, but after research, I found that the first 2KBytes of the firmware may not be encrypted, so I tried to implement a firmware smaller than 2KByte. The only function was to read the the first 4KByte of Flash which storing Bootloader and send it out through the serial port on the K connector, source code refer to [reverse_engineering/bf-uv5rm-btldr-dumper](reverse_engineering/bf-uv5rm-btldr-dumper), and the output upgrade package refer to [reverse_engineering/bf-uv5rm-btldr-dumper-fw.BF](reverse_engineering/bf-uv5rm-btldr-dumper-fw.BF).
 
 Dumped bootloader was placed at [reverse_engineering/dumped_btldr.bin](reverse_engineering/dumped_btldr.bin)
 
