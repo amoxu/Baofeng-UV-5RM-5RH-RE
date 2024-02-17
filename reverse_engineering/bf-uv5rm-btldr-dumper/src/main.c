@@ -32,18 +32,25 @@ int main(void) {
   }
   print("\r\n");
 
-  dumpflash(0, 0x2000);
+  print("*** BOOTLOADER ***\r\n");
+  dumpflash(FLASH_BASE, 0x1000);
+
+  print("*** USER SYSTEM DATA ***\r\n");
+  dumpflash(USD_BASE, 0x200);
+
+  print("*** SYS BOOTLOADER ***\r\n");
+  dumpflash(0x1FFFE400, 0x1000);
 
   while (true) {
   }
 }
 
 void dumpflash(uint32_t addr, uint32_t len) {
-  /* Address out of range. */
-  if (addr > (DEV_FLASH_SIZE * 1024) ||
-      (addr + len) > (DEV_FLASH_SIZE * 1024)) {
-    return;
-  }
+  // /* Address out of range. */
+  // if (addr > (DEV_FLASH_SIZE * 1024) ||
+  //     (addr + len) > (DEV_FLASH_SIZE * 1024)) {
+  //   return;
+  // }
 
   /* Address is not 4 bytes aligned, will start from (addr - addr % 4) */
   if (addr % 4 != 0) {
@@ -64,8 +71,8 @@ void dumpflash(uint32_t addr, uint32_t len) {
   if (pageLen > len) {
     pageLen = len;
   }
-  flash_read_words(addr + FLASH_BASE, readBuf, pageLen / 4);
-  hex_dump(readBuf, pageLen, addr + FLASH_BASE);
+  flash_read_words(addr, readBuf, pageLen / 4);
+  hex_dump(readBuf, pageLen, addr);
 
   uint32_t leftLen = (len - pageLen);
 
@@ -77,8 +84,8 @@ void dumpflash(uint32_t addr, uint32_t len) {
     } else {
       pageLen = leftLen;
     }
-    flash_read_words(addr + FLASH_BASE, readBuf, pageLen / 4);
-    hex_dump(readBuf, pageLen, addr + FLASH_BASE);
+    flash_read_words(addr, readBuf, pageLen / 4);
+    hex_dump(readBuf, pageLen, addr);
 
     leftLen -= pageLen;
   }
