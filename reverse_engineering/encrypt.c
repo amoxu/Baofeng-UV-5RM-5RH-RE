@@ -17,9 +17,9 @@ The first two packages and the last two packages need to keep the original text 
 #define XOR_KEY1 "KDHT"
 #define XOR_KEY2 "RBGI"
 
-void xor_encrypt(char *data, char *key, int len) {
+void xor_encrypt(uint8_t *data, char *key, int len) {
   for (int i = 0; i < len; i++) {
-    char byte = data[i];
+    uint8_t byte = data[i];
     if (byte != 0 && byte != 0xFF && byte != key[i % 4] &&
         byte != (key[i % 4] ^ 0xFF)) {
       data[i] ^= key[i % 4];
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
     package_count++;
   }
   
-  char *buffer = (char *)malloc(PACKAGE_SIZE);
+  uint8_t *buffer = (uint8_t *)malloc(PACKAGE_SIZE);
 
   for (int i = 0; i < package_count; i++) {
     int current_package_size = (i == package_count - 1 && last_package_size > 0)
