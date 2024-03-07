@@ -82,6 +82,11 @@ The firmware package was encrypted, but after research, I found that the first 2
 
 Dumped bootloader was placed at [reverse_engineering/dumped_btldr.bin](reverse_engineering/dumped_btldr.bin)
 
+#### [2024-02-18 UPDATE]
+After some RE works on the bootlader, I found that SYSTEM BOOTLOADER region(Start from 0x1FFFE400, total 4KB erasable Flash) was used to store the configuration data, this is why the ISP bootmode of AT32F421 doesn't work.
+
+Dumped SYSTEM BOOTLOADER was placed at [reverse_engineering/dumped_sysbtldr.bin](reverse_engineering/dumped_sysbtldr.bin) 
+
 ### 4). Bootloader reverse engineering for Firmware Upgrade Protocol and Encryption details
 
 After the bootloader had dumped out, the details of the encryption algorithm in the bootloader were studied through Ghidra reverse engineering.
@@ -101,7 +106,12 @@ This can be used for firmware encryption and decryption, and also provides condi
 > | 0x05 | 4 | Region 2 Length, config length? |
 > | 0x09 | 7 | No clear usage found, testing of random values seems no impact. |
 > | 0x10 | Region 1 Length | Encrypted Firmware Bin Hex |
-> | 0x10 + Region 1 Length | Region 2 Length | Configuration Hex? It’s not clear yet. The guess was that it is related to the configuration. It will be clear after the Bootloader and Firmware are completely reverse engineered. |
+> | 0x10 + Region 1 Length | Region 2 Length | ~~Configuration- Hex? It’s not clear yet. The guess was that it is related to the configuration. It will be clear after the Bootloader and Firmware are completely reverse engineered~~ <br> Data part, this part will be upload to SYSTEM BOOTLOADER region(start from address 0x1FFFE400, maximum 4KB), this is why the ISP function of the AT32F421 doesn't work.  |
+
+#### [2024-03-07 UPDATE]
+I made a tool for wrapping/unwrapping the firmware file, refer to [reverse_engineering/uv5rm-wrap-tool](reverse_engineering/uv5rm-wrap-tool).
+
+Thanks to OK2MOP, who also made a python script for wrapping/unwrapping the firmware file, refer to [reverse_engineering/bao_fw_tool.py](reverse_engineering/bao_fw_tool.py).
 
 ### 5). Factory firmware decryption and reverse engineering
 
