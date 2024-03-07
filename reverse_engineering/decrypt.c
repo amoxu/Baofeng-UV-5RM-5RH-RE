@@ -5,9 +5,9 @@
 #define XOR_KEY1 "KDHT"
 #define XOR_KEY2 "RBGI"
 
-void xor_decrypt(char *data, char *key, int len) {
+void xor_decrypt(unsigned char *data, unsigned char *key, int len) {
   for (int i = 0; i < len; i++) {
-    char byte = data[i];
+    unsigned char byte = data[i];
     if (byte != 0 && byte != 0xFF && byte != key[i % 4] &&
         byte != (key[i % 4] ^ 0xFF)) {
       data[i] ^= key[i % 4];
@@ -39,19 +39,19 @@ int main(int argc, char *argv[]) {
     package_count++;
   }
 
-  char *buffer = (char *)malloc(PACKAGE_SIZE);
+  unsigned char *buffer = (unsigned char *)malloc(PACKAGE_SIZE);
 
   for (int i = 0; i < package_count; i++) {
-    int current_package_size = (i == package_count - 1 && last_package_size > 0)
+    size_t current_package_size = (i == package_count - 1 && last_package_size > 0)
                                    ? last_package_size
                                    : PACKAGE_SIZE;
-    fread(buffer, current_package_size, 1, input);
+    current_package_size = fread(buffer, 1, current_package_size, input);
 
     if (i >= 2 && i < package_count - 2) {
       if (i % 3 == 1) {
-        xor_decrypt(buffer, XOR_KEY1, current_package_size);
+        xor_decrypt(buffer, (unsigned char *)XOR_KEY1, current_package_size);
       } else if (i % 3 == 2) {
-        xor_decrypt(buffer, XOR_KEY2, current_package_size);
+        xor_decrypt(buffer, (unsigned char *)XOR_KEY2, current_package_size);
       }
     }
 
