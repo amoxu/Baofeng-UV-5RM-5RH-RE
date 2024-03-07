@@ -1,0 +1,6 @@
+*.dSYM
+*.BF
+*.bin
+*.data
+uv5rm-wrap-tool
+.vscode/settings.json
