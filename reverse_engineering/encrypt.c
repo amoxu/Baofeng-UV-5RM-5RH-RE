@@ -8,6 +8,9 @@ Note that the last package may be less than 1KB, and then perform a set of encry
 The first KB keeps the original text unencrypted, the 2KB is encrypted using the first Xor table, and the 3KB is encrypted using the second Xor table. 
 When performing xor encryption, it is necessary to judge the status of each byte. If the value of the byte is 0 or 0xFF, or this byte is the same as the Xor key byte, or the byte is equal to the xor key XOR 0xFF , this byte is not encrypted. 
 The first two packages and the last two packages need to keep the original text without encryption, and the input file and output file are required to be passed in using parameters.
+
+
+Programming mistakes (signedness, return values) patched by OK2MOP
 */
 
 #include <stdio.h>
@@ -17,9 +20,10 @@ The first two packages and the last two packages need to keep the original text 
 #define XOR_KEY1 "KDHT"
 #define XOR_KEY2 "RBGI"
 
-void xor_encrypt(uint8_t *data, char *key, int len) {
+void xor_encrypt(unsigned char *data, unsigned char *key, int len) {
   for (int i = 0; i < len; i++) {
-    uint8_t byte = data[i];
+    unsigned char byte = data[i];
+
     if (byte != 0 && byte != 0xFF && byte != key[i % 4] &&
         byte != (key[i % 4] ^ 0xFF)) {
       data[i] ^= key[i % 4];
@@ -51,19 +55,20 @@ int main(int argc, char *argv[]) {
     package_count++;
   }
   
-  uint8_t *buffer = (uint8_t *)malloc(PACKAGE_SIZE);
+  unsigned char *buffer = (unsigned char *)malloc(PACKAGE_SIZE);
+
 
   for (int i = 0; i < package_count; i++) {
-    int current_package_size = (i == package_count - 1 && last_package_size > 0)
+    size_t current_package_size = (i == package_count - 1 && last_package_size > 0)
                                    ? last_package_size
                                    : PACKAGE_SIZE;
-    fread(buffer, current_package_size, 1, input);
+    current_package_size = fread(buffer, 1, current_package_size, input);
 
     if (i >= 2 && i < package_count - 2) {
       if (i % 3 == 1) {
-        xor_encrypt(buffer, XOR_KEY1, current_package_size);
+        xor_encrypt(buffer, (unsigned char *)XOR_KEY1, current_package_size);
       } else if (i % 3 == 2) {
-        xor_encrypt(buffer, XOR_KEY2, current_package_size);
+        xor_encrypt(buffer, (unsigned char *)XOR_KEY2, current_package_size);
       }
     }
 
