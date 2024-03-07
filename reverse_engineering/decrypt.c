@@ -41,6 +41,7 @@ int main(int argc, char *argv[]) {
 
   unsigned char *buffer = (unsigned char *)malloc(PACKAGE_SIZE);
 
+
   for (int i = 0; i < package_count; i++) {
     size_t current_package_size = (i == package_count - 1 && last_package_size > 0)
                                    ? last_package_size

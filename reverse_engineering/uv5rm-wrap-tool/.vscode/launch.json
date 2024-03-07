@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(lldb) Run",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/uv5rm-wrap-tool",
+            "args": ["-i","5RH_BK_V0.14_231123.BF","-o","5rh_bk_v0.14.bin","-m","unwrap"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        }
+
+    ]
+}

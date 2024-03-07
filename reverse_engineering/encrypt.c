@@ -23,6 +23,7 @@ Programming mistakes (signedness, return values) patched by OK2MOP
 void xor_encrypt(unsigned char *data, unsigned char *key, int len) {
   for (int i = 0; i < len; i++) {
     unsigned char byte = data[i];
+
     if (byte != 0 && byte != 0xFF && byte != key[i % 4] &&
         byte != (key[i % 4] ^ 0xFF)) {
       data[i] ^= key[i % 4];
@@ -55,6 +56,7 @@ int main(int argc, char *argv[]) {
   }
   
   unsigned char *buffer = (unsigned char *)malloc(PACKAGE_SIZE);
+
 
   for (int i = 0; i < package_count; i++) {
     size_t current_package_size = (i == package_count - 1 && last_package_size > 0)
